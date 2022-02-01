@@ -6,8 +6,16 @@ exports.up = async (knex) => {
       users.string('password', 200).notNullable()
       users.timestamps(false, true)
     })
+    .createTable('plants', (plants) => {
+      plants.increments('plant_id')
+      plants.string('nickname', 200).notNullable()
+      plants.string('species', 200).notNullable()
+      plants.string('H2O_frequency', 200).notNullable()
+    })
 }
 
 exports.down = async (knex) => {
-  await knex.schema.dropTableIfExists('users')
+  await knex.schema
+  .dropTableIfExists('users')
+  .dropTableIfExists('plants')
 }
