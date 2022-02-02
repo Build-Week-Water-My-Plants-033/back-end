@@ -1,7 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
-//const authRouter = require('')
+const authRouter = require('./_auth/auth-router')
 //const plantsRouter = require('')
 
 
@@ -11,7 +11,7 @@ server.use(helmet())
 server.use(cors())
 
 
-// server.use("/api/auth", authRouter); UNCOMMENT THIS OUT ONCE AUTH ROUTER IS SET UP - DONT FORGET TO REQUIRE IT UP TOP!
+server.use("/api/auth", authRouter);
 // server.use("/api/plants", plantsRouter); UNCOMMENT THIS OUT ONCE PLANTS ROUTER IS SET UP - DONT FORGET TO REQUIRE IT UP TOP!
 
 server.use((err, req, res, next) => { // eslint-disable-line
