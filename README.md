@@ -2,10 +2,10 @@
   
 Endpoints
   
---
+
   /POST
 
-  /api/auth/login
-  /api/auth/signup
---
+  - /api/auth/login
+  - /api/auth/signup
+
 
