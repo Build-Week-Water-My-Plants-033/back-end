@@ -6,7 +6,7 @@ const getById = (id) => db("users").where({ id }).first();
 const insert = (user) =>
   db("users")
     .insert(user)
-    .then(([id]) => {
+    .then((id) => {
       return { id, ...user };
     });
 const update = (user) =>
