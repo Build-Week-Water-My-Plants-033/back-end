@@ -1,23 +1,32 @@
-const express = require('express')
-const helmet = require('helmet')
-const cors = require('cors')
-const authRouter = require('./_auth/auth-router')
-//const plantsRouter = require('')
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const server = express();
 
+const authRouter = require("./_auth/auth-router");
+const plantsRouter = require("./_plants/plants-router");
+const { restricted } = require("./_auth/auth-middleware");
 
-const server = express()
-server.use(express.json())
-server.use(helmet())
-server.use(cors())
-
+server.use(express.json());
+server.use(helmet());
+server.use(cors());
 
 server.use("/api/auth", authRouter);
-// server.use("/api/plants", plantsRouter); UNCOMMENT THIS OUT ONCE PLANTS ROUTER IS SET UP - DONT FORGET TO REQUIRE IT UP TOP!
+server.use("/api/plants", restricted, plantsRouter);
 
-server.use((err, req, res, next) => { // eslint-disable-line
+server.get("/", (req, res) => {
+  res.send("<h1>Welcome to Water My Plants API</h1>");
+});
+
+server.use("*", (req, res) => {
+  res.status(404).json({ message: "This endpoint does not exist" });
+});
+
+server.use((err, req, res, next) => {
+  // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
     stack: err.stack,
   });
 });
-module.exports = server
+module.exports = server;

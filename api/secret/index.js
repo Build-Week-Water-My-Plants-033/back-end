@@ -1,4 +1,7 @@
+const BCRYPT_ROUNDS = Number(process.env.BCRYPT_ROUNDS) || 8;
 
-const secret = process.env.SECRET || 'aspodhuifhuioohgeraouiorwggjbnasdfgvjsfbvaloaswqqzpfmnwejkvys';
+const SECRET =
+  process.env.SECRET ||
+  "aspodhuifhuioohgeraouiorwggjbnasdfgvjsfbvaloaswqqzpfmnwejkvys";
 
-module.exports = secret;
+module.exports = { BCRYPT_ROUNDS, SECRET };
